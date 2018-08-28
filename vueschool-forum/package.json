@@ -5,10 +5,11 @@
   "author": "",
   "private": true,
   "scripts": {
-    "dev": "node build/dev-server.js",
+    "dev": "node -r dotenv/config build/dev-server.js",
     "start": "npm run dev",
     "build": "node build/build.js",
-    "lint": "eslint --ext .js,.vue src"
+    "lint": "eslint --ext .js,.vue src",
+    "db:seed": "firebase database:set / src/data.json -y"
   },
   "dependencies": {
     "moment": "^2.22.2",

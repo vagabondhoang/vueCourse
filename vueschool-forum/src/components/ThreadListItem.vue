@@ -1,5 +1,5 @@
 <template>
-  <div class="thread">
+  <div v-if="thread && user" class="thread">
     <div>
       <p>
         <router-link :to="{name: 'ThreadShow', params: {id: thread['.key']}}">{{thread.title}}</router-link>
@@ -16,7 +16,6 @@
   </div>
 </template>
 <script>
-  import {countObjectProperties} from '@/utils'
   export default {
     props: {
       thread: {
@@ -27,7 +26,7 @@
 
     computed: {
       repliesCount () {
-        return countObjectProperties(this.thread.posts) - 1
+        return this.$store.getters.threadRepliesCount(this.thread['.key'])
       },
       user () {
         return this.$store.state.users[this.thread.userId]
